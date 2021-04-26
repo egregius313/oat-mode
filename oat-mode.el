@@ -30,20 +30,29 @@
   :group 'oat)
 
 (defvar oat-font-lock-keywords
-  (let* ((oat-keywords (rx symbol-start (or "if" "if?" "return" "for" "while" "else" "var" "new" "global") symbol-end))
-		 (oat-types (rx symbol-start (or "int" "bool" "string" "void") symbol-end))
-		 (oat-constants (rx symbol-start (or "true" "false" "null" symbol-end)))
-		 (oat-builtins (rx symbol-start
-						   (or "length"
-							   "array_of_string"
-							   "string_of_array"
-							   "length_of_string"
-							   "string_of_int"
-							   "string_cat"
-							   "print_string"
-							   "print_int"
-							   "print_bool")
-						   symbol-end)))
+  (let* ((oat-keywords (rx symbol-start
+			   (or "if" "if?" "return" "for" "while" "else" "var" "new" "global" "struct")
+			   symbol-end))
+	 (oat-simple-types (rx (or "int" "bool" "string" "void")))
+	 (oat-types (rx symbol-start
+			(or "int"
+			    "bool"
+			    "string"
+			    "void"
+			    (and "(" (? (and (*? (and word ",")) word)) ")"))
+			symbol-end))
+	 (oat-constants (rx symbol-start (or "true" "false" "null" symbol-end)))
+	 (oat-builtins (rx symbol-start
+			   (or "length"
+			       "array_of_string"
+			       "string_of_array"
+			       "length_of_string"
+			       "string_of_int"
+			       "string_cat"
+			       "print_string"
+			       "print_int"
+			       "print_bool")
+			   symbol-end)))
 	`((,oat-keywords . font-lock-keyword-face)
 	  (,oat-types . font-lock-type-face)
 	  (,oat-builtins . font-lock-builtin-face)
