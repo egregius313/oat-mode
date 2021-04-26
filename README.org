@@ -1,0 +1,23 @@
+#+TITLE: ~oat-mode.el~
+
+* What is Oat?
+
+/Oat/ is a simple C-like programming language used in compilers courses, such as
+[[https://www.cis.upenn.edu/~cis341][UPenn's CIS 341]].
+
+* Installation
+
+** Using ~straight.el~
+
+If you use [[https://github.com/raxod502/straight.el#installing-packages-programmatically][straight.el]], this package can be installed with the following recipe:
+
+#+begin_src emacs-lisp
+(straight-use-package :type git :host github :repo "egregius313/oat-mode")
+#+end_src
+
+Or if using ~straight~ with ~use-package~:
+
+#+begin_src emacs-lisp
+(use-package oat-mode
+  :straight (:type git :host github :repo "egregius/oat-mode"))
+#+end_src
